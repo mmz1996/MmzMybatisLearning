@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--核心配置文件-->
+<mapper namespace="com.mmz.dao.StudentMapper">
+
+    <!--思路
+    1.查询所有的学生信息
+    2.根据查询出来的学生的id，寻找对应的老师！
+    -->
+   <resultMap id="StudentTeacher" type="Student">
+       <result property="id" column="id"></result>
+       <result property="name" column="name"></result>
+       <!--复杂的属性需要单独处理
+       对象使用assocation
+       集合使用collection
+       -->
+       <association property="teacher" column="tid" javaType="com.mmz.pojo.Teacher" select="getTeacher">
+       </association>
+   </resultMap>
+    
+    <select id="getStudent" resultMap="StudentTeacher">
+        select * from student
+    </select>
+
+    <select id="getTeacher" resultType="com.mmz.pojo.Teacher">
+        select * from teacher where id = #{id}
+    </select>
+</mapper>

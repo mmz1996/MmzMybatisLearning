@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--核心配置文件-->
+<configuration>
+    <!--    配置环境-->
+
+    <properties resource="db.properties"></properties>
+
+    <!--可以给实体类起别名-->
+    <typeAliases>
+        <package name="com.mmz.pojo"/>
+    </typeAliases>
+    <environments default="mysql">
+        <environment id="mysql">
+            <!--            事务类型-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--   配置数据源（连接池）         -->
+            <dataSource type="POOLED">
+                <!--                配置数据库的四个基本信息-->
+                <property name="driver" value="${driver}"></property>
+                <property name="url" value="${url}"></property>
+                <property name="username" value="${username}"></property>
+                <property name="password" value="${password}"></property>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <mappers>
+        <mapper class="com.mmz.dao.TeacherMapper"></mapper>
+        <mapper class="com.mmz.dao.StudentMapper"></mapper>
+    </mappers>
+
+
+
+
+</configuration>
